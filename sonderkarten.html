@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SoundCheck – Sonderkarten</title>
+    <style>
+        body {
+            background: #121212;
+            color: #fff;
+            font-family: system-ui, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 2rem;
+        }
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        .player {
+            background: #1e1e1e;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+        }
+        audio {
+            width: 300px;
+        }
+    </style>
+</head>
+<body>
+    <h1>SoundCheck – Sonderkarten</h1>
+    <div class="player">
+        <audio id="audio" controls>
+            <source id="audioSource" type="audio/mpeg">
+            Dein Browser unterstützt das Audio-Element nicht.
+        </audio>
+    </div>
+    
+<script>
+    const sounds = ["Sounds/Sonderkarten/Sonderkarte_richtige Schaetzung.mp3", "Sounds/Sonderkarten/Sonderkartetausch.mp3"];
+    const randomSound = sounds[Math.floor(Math.random() * sounds.length)];
+    const audio = document.getElementById('audio');
+    const source = document.getElementById('audioSource');
+    source.src = randomSound;
+    audio.load();
+</script>
+
+</body>
+</html>
