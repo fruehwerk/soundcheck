@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SoundCheck – Zufallssound</title>
+  <title>SoundCheck – Zufallssounds</title>
   <style>
     body {
       margin: 0;
@@ -13,59 +13,130 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
-      min-height: 100vh;
+      justify-content: start;
       padding: 2rem;
     }
 
     h1 {
       font-size: 2rem;
-      margin-bottom: 2rem;
+      margin-bottom: 1rem;
       text-align: center;
     }
 
-    .player {
-      background: #1e1e1e;
-      padding: 2rem;
-      border-radius: 1rem;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-      max-width: 600px;
+    .category {
+      margin: 2rem 0;
       width: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      max-width: 600px;
+    }
+
+    .category h2 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      border-bottom: 2px solid #00bcd4;
+      padding-bottom: 0.5rem;
     }
 
     audio {
       width: 100%;
-      max-width: 100%;
-      border-radius: 0.5rem;
-      background-color: #333;
+      margin-bottom: 1rem;
+      background: #1e1e1e;
+      border-radius: 8px;
     }
 
+    .player {
+      background: #1e1e1e;
+      padding: 1rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+      margin-bottom: 2rem;
+    }
   </style>
 </head>
 <body>
-  <h1>🎧 SoundCheck – Zufallssound</h1>
-  <div class="player">
-    <audio id="audioPlayer" controls autoplay>
-      <source id="audioSource" src="" type="audio/mpeg" />
-      Dein Browser unterstützt kein Audio.
-    </audio>
+  <h1>🎧 SoundCheck – Zufallssounds</h1>
+
+  <div class="category">
+    <h2>Alltag & Kultur</h2>
+    <div class="player"><audio controls src="Sounds/Alltag/Adhan.mp3"></audio></div>
+    <div class="player"><audio controls src="Sounds/Alltag/Austrian Police.wav"></audio></div>
+    <div class="player"><audio controls src="Sounds/Alltag/Autotür.mp3"></audio></div>
+    <div class="player"><audio controls src="Sounds/Alltag/Deutsche Polizei Martinshorn.mp3"></audio></div>
+    <div class="player"><audio controls src="Sounds/Alltag/Dossen oeffnen.mp3"></audio></div>
+    <div class="player"><audio controls src="Sounds/Alltag/Eiswuerfel fällt ins Glass.mp3"></audio></div>
+    <div class="player"><audio controls src="Sounds/Alltag/Furz.mp3"></audio></div>
+    <div class="player"><audio controls src="Sounds/Alltag/Glocke des Petersdoms.mp3"></audio></div>
+    <div class="player"><audio controls src="Sounds/Alltag/Haarföhn.mp3"></audio></div>
+    <div class="player"><audio controls src="Sounds/Alltag/Kaffee Maschine.mp3"></audio></div>
+    <div class="player"><audio controls src="Sounds/Alltag/Karottenreibe.mp3"></audio></div>
+    <div class="player"><audio controls src="Sounds/Alltag/Klettverschluss.mp3"></audio></div>
+    <div class="player"><audio controls src="Sounds/Alltag/Kochendes Wasser.mp3"></audio></div>
+    <div class="player"><audio controls src="Sounds/Alltag/Muenze faellt ins Glas.mp3"></audio></div>
+    <div class="player"><audio controls src="Sounds/Alltag/Netflix.mp3"></audio></div>
+    <div class="player"><audio controls src="Sounds/Alltag/Pixie Dust – Android-Benachrichtigungston.mp3"></audio></div>
+    <div class="player"><audio controls src="Sounds/Alltag/Plastikfolie.mp3"></audio></div>
+    <div class="player"><audio controls src="Sounds/Alltag/PornHub Intro.mp3"></audio></div>
+    <div class="player"><audio controls src="Sounds/Alltag/Reißverschluss.mp3"></audio></div>
+    <div class="player"><audio controls src="Sounds/Alltag/Seite in einem Buch umblättern.mp3"></audio></div>
+    <div class="player"><audio controls src="Sounds/Alltag/Siri.mp3"></audio></div>
+    <div class="player"><audio controls src="Sounds/Alltag/Staubsauger.mp3"></audio></div>
+    <div class="player"><audio controls src="Sounds/Alltag/Unterschrift auf einem Papier.mp3"></audio></div>
+    <div class="player"><audio controls src="Sounds/Alltag/Waschmaschine.mp3"></audio></div>
+    <div class="player"><audio controls src="Sounds/Alltag/Whatsapp Chat.mp3"></audio></div>
   </div>
 
-  <script>
-    const sounds = [
-      "Sounds/Alltag/Dosen oeffnen.mp3",
-      "Sounds/Alltag/Kochendes Wasser.mp3",
-      "Sounds/Alltag/Plastikfolie.mp3"
-    ];
+  <div class="category">
+    <h2>Natur</h2>
+    <div class="player"><audio controls src="Sounds/Natur/Agressiver Pitbull Bellen.mp3"></audio></div>
+    <div class="player"><audio controls src="Sounds/Natur/Baby Crocodile.mp3"></audio></div>
+    <div class="player"><audio controls src="Sounds/Natur/Baby Reh.mp3"></audio></div>
+    <div class="player"><audio controls src="Sounds/Natur/Chihuahua bellen.mp3"></audio></div>
+    <div class="player"><audio controls src="Sounds/Natur/Schimpanzee.mp3"></audio></div>
+    <div class="player"><audio controls src="Sounds/Natur/Deutscher Schäferhund bellt.mp3"></audio></div>
+    <div class="player"><audio controls src="Sounds/Natur/Eule.mp3"></audio></div>
+    <div class="player"><audio controls src="Sounds/Natur/Feuer.mp3"></audio></div>
+    <div class="player"><audio controls src="Sounds/Natur/Gecko in Bali.mp3"></audio></div>
+    <div class="player"><audio controls src="Sounds/Natur/Gletscherkalben.mp3"></audio></div>
+    <div class="player"><audio controls src="Sounds/Natur/Hirsch.mp3"></audio></div>
+    <div class="player"><audio controls src="Sounds/Natur/Kuecken.mp3"></audio></div>
+    <div class="player"><audio controls src="Sounds/Natur/Nilpferd.mp3"></audio></div>
+    <div class="player"><audio controls src="Sounds/Natur/Singende San Dünen in Al-Askharah, Oman.wav"></audio></div>
+    <div class="player"><audio controls src="Sounds/Natur/Singende San Dünen in Near Tarfaya, Marocco.wav"></audio></div>
+    <div class="player"><audio controls src="Sounds/Natur/Specht.wav"></audio></div>
+    <div class="player"><audio controls src="Sounds/Natur/Taube.mp3"></audio></div>
+    <div class="player"><audio controls src="Sounds/Natur/Uhu.mp3"></audio></div>
+    <div class="player"><audio controls src="Sounds/Natur/Ziegen Maeh.mp3"></audio></div>
+  </div>
 
-    const randomIndex = Math.floor(Math.random() * sounds.length);
-    const selectedSound = sounds[randomIndex];
-    const audioSource = document.getElementById("audioSource");
-    audioSource.src = selectedSound;
-    document.getElementById("audioPlayer").load();
-  </script>
+  <div class="category">
+    <h2>Sonderkarten</h2>
+    <div class="player"><audio controls src="Sounds/Sonderkarten/Sonderkarte_richtige Schaetzung.mp3"></audio></div>
+    <div class="player"><audio controls src="Sounds/Sonderkarten/Sonderkartetausch.mp3"></audio></div>
+  </div>
+
+  <div class="category">
+    <h2>Technik & Digitales</h2>
+    <div class="player"><audio controls src="Sounds/Technik/Airbus.mp3"></audio></div>
+    <div class="player"><audio controls src="Sounds/Technik/AK 47-8760.mp3"></audio></div>
+    <div class="player"><audio controls src="Sounds/Technik/BMW Werbung Maerz 2013.mp3"></audio></div>
+    <div class="player"><audio controls src="Sounds/Technik/Discord Anruf.mp3"></audio></div>
+    <div class="player"><audio controls src="Sounds/Technik/Discord-Abwesenheitsbenachrichtigung .mp3"></audio></div>
+    <div class="player"><audio controls src="Sounds/Technik/Drucker.mp3"></audio></div>
+    <div class="player"><audio controls src="Sounds/Technik/Feuerzeug.mp3"></audio></div>
+    <div class="player"><audio controls src="Sounds/Technik/Fiat 500 Zweizylinder.mp3"></audio></div>
+    <div class="player"><audio controls src="Sounds/Technik/Flugzeugtoilette.mp3"></audio></div>
+    <div class="player"><audio controls src="Sounds/Technik/Gamecube Startscreen.wav"></audio></div>
+    <div class="player"><audio controls src="Sounds/Technik/Intel.mp3"></audio></div>
+    <div class="player"><audio controls src="Sounds/Technik/JBL Bluetooth.mp3"></audio></div>
+    <div class="player"><audio controls src="Sounds/Technik/Leopard 2A7 Motorstart, 1500 PS.mp3"></audio></div>
+    <div class="player"><audio controls src="Sounds/Technik/Mercedes G63 AMG Brabus.mp3"></audio></div>
+    <div class="player"><audio controls src="Sounds/Technik/Microsoft Teams Benachrichtigung.mp3"></audio></div>
+    <div class="player"><audio controls src="Sounds/Technik/Microsoft Windows 7 Startscreen.mp3"></audio></div>
+    <div class="player"><audio controls src="Sounds/Technik/Nintendo 3DS Startscreen.wav"></audio></div>
+    <div class="player"><audio controls src="Sounds/Technik/Nintendo 64 Startscreen Screen.wav"></audio></div>
+    <div class="player"><audio controls src="Sounds/Technik/Nintendo DS Startscreen Screen.wav"></audio></div>
+    <div class="player"><audio controls src="Sounds/Technik/Teams Microsoft Teams Anrufer-Ton.mp3"></audio></div>
+    <div class="player"><audio controls src="Sounds/Technik/Wii Startscreen.wav"></audio></div>
+    <div class="player"><audio controls src="Sounds/Technik/Windows-Fehler.mp3"></audio></div>
+  </div>
 </body>
 </html>
