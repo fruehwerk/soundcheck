@@ -77,14 +77,37 @@
       "Sounds/Natur/Ziegen Maeh.mp3"
     ];
 
-    const randomSound = sounds[Math.floor(Math.random() * sounds.length)];
-    const audio = document.getElementById('audio');
-    const source = document.getElementById('audioSource');
-    const title = document.getElementById('soundTitle');
+    // 1 Stunde = 3600000 ms
+    const BLOCK_DURATION_MS = 3600000;
+    const now = Date.now();
 
-    source.src = randomSound;
-    audio.load();
-    title.textContent = randomSound.split('/').pop().replace(/\.(mp3|wav)$/i, '');
+    // Lade gespeicherte Daten
+    let blocked = JSON.parse(localStorage.getItem("soundcheck_blocked") || "{}");
+
+    // Filtere Sounds, die innerhalb der letzten Stunde abgespielt wurden
+    const available = sounds.filter(sound => {
+      const lastPlayed = blocked[sound];
+      return !lastPlayed || now - lastPlayed > BLOCK_DURATION_MS;
+    });
+
+    // Falls keine Sounds mehr übrig sind, lösche den Verlauf
+    if (available.length === 0) {
+      localStorage.removeItem("soundcheck_blocked");
+      location.reload();
+    } else {
+      const randomSound = available[Math.floor(Math.random() * available.length)];
+      const audio = document.getElementById("audio");
+      const source = document.getElementById("audioSource");
+      const title = document.getElementById("soundTitle");
+
+      source.src = randomSound;
+      audio.load();
+      title.textContent = randomSound.split('/').pop().replace(/\.(mp3|wav)$/i, '');
+
+      // Merke den Zeitpunkt der Wiedergabe
+      blocked[randomSound] = now;
+      localStorage.setItem("soundcheck_blocked", JSON.stringify(blocked));
+    }
   </script>
 </body>
 </html>
