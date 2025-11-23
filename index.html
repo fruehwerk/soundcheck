@@ -1,20 +1,94 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
-    <meta charset="UTF-8">
-    <title>SoundCheck</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SoundCheck – Zufallssound</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: system-ui, sans-serif;
+      background: #121212;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 2rem;
+    }
+
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+
+    .player {
+      background: #1e1e1e;
+      padding: 2rem;
+      border-radius: 1rem;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      max-width: 90vw;
+    }
+
+    button {
+      background: #00bcd4;
+      color: white;
+      border: none;
+      padding: 1rem 2rem;
+      margin: 1rem 0;
+      border-radius: 2rem;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background: #0097a7;
+    }
+
+    audio {
+      width: 100%;
+      margin-top: 1rem;
+    }
+
+    @media (min-width: 768px) {
+      h1 {
+        font-size: 2.5rem;
+      }
+      button {
+        font-size: 1.1rem;
+      }
+      .player {
+        max-width: 600px;
+      }
+    }
+  </style>
 </head>
 <body>
-    <h1>SoundCheck - Kategorie: Alltag</h1>
-    <script>
-        const sounds = [
-            "Dosen oeffnen.mp3",
-            "Kochendes Wasser.mp3",
-            "Plastikfolie.mp3",
-            "PornHub Intro.mp3"
-        ];
-        const randomSound = sounds[Math.floor(Math.random() * sounds.length)];
-        document.write(`<audio controls autoplay src="Sounds/Alltag/${randomSound}"></audio>`);
-    </script>
+  <h1>🎧 SoundCheck – Zufallssound</h1>
+  <div class="player">
+    <button onclick="playRandomSound()">🔀 Zufälligen Sound abspielen</button>
+    <audio id="audio" controls></audio>
+  </div>
+
+  <script>
+    const sounds = [
+      "Sounds/Alltag/Dosen_oeffnen.mp3",
+      "Sounds/Alltag/Kochendes_Wasser.mp3",
+      "Sounds/Alltag/Plastikfolie.mp3"
+    ];
+
+    function playRandomSound() {
+      const random = Math.floor(Math.random() * sounds.length);
+      const audio = document.getElementById("audio");
+      audio.src = sounds[random];
+      audio.play();
+    }
+  </script>
 </body>
 </html>
