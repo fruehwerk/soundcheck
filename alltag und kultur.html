@@ -1,54 +1,131 @@
+
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SoundCheck – Alltag &amp; Kultur</title>
-    <style>
-        body {
-            background: #121212;
-            color: #fff;
-            font-family: system-ui, sans-serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            padding: 2rem;
-        }
-        h1 {
-            font-size: 2rem;
-            margin-bottom: 1rem;
-            text-align: center;
-        }
-        .player {
-            background: #1e1e1e;
-            padding: 2rem;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-        }
-        audio {
-            width: 300px;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SoundCheck – Alltag & Kultur</title>
+  <style>
+    body {
+      background: #121212;
+      color: #fff;
+      font-family: system-ui, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 2rem;
+    }
+
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+
+    .player {
+      background: #1e1e1e;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    audio {
+      width: 300px;
+      margin-bottom: 1rem;
+    }
+
+    .title {
+      font-size: 1.1rem;
+      color: #ccc;
+      margin-top: 1rem;
+      display: none;
+    }
+
+    button {
+      margin-top: 1rem;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 0.6rem 1.2rem;
+      border-radius: 8px;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+  </style>
 </head>
 <body>
-    <h1>SoundCheck – Alltag &amp; Kultur</h1>
-    <div class="player">
-        <audio id="audio" controls>
-            <source id="audioSource" type="audio/mpeg">
-            Dein Browser unterstützt das Audio-Element nicht.
-        </audio>
-    </div>
-    
-<script>
-    const sounds = ["Sounds/Alltag & Kultur/Dossen oeffnen.mp3", "Sounds/Alltag & Kultur/Kochendes Wasser.mp3", "Sounds/Alltag & Kultur/Plastikfolie.mp3"];
-    const randomSound = sounds[Math.floor(Math.random() * sounds.length)];
-    const audio = document.getElementById('audio');
-    const source = document.getElementById('audioSource');
-    source.src = randomSound;
-    audio.load();
-</script>
+  <h1>SoundCheck – Alltag & Kultur</h1>
+  <div class="player">
+    <audio id="audio" controls>
+      <source id="audioSource" type="audio/mpeg" />
+      Dein Browser unterstützt das Audio-Element nicht.
+    </audio>
+    <button onclick="showTitle()">Lösung</button>
+    <div class="title" id="soundTitle"></div>
+  </div>
+  <script>
+    const sounds = [
+      "Sounds/Alltag und Kultur/Adhan.mp3",
+      "Sounds/Alltag und Kultur/Austrian Police.wav",
+      "Sounds/Alltag und Kultur/Autotür.mp3",
+      "Sounds/Alltag und Kultur/Deutsche Polizei Martinshorn.mp3",
+      "Sounds/Alltag und Kultur/Dossen oeffnen.mp3",
+      "Sounds/Alltag und Kultur/Eiswuerfel fällt ins Glass.mp3",
+      "Sounds/Alltag und Kultur/Furz.mp3",
+      "Sounds/Alltag und Kultur/Glocke des Petersdoms.mp3",
+      "Sounds/Alltag und Kultur/Haartföhn.mp3",
+      "Sounds/Alltag und Kultur/Kaffee Maschine.mp3",
+      "Sounds/Alltag und Kultur/Karottenreibe.mp3",
+      "Sounds/Alltag und Kultur/Klettverschluss.mp3",
+      "Sounds/Alltag und Kultur/Kochendes Wasser.mp3",
+      "Sounds/Alltag und Kultur/Muenze faellt ins Glas.mp3",
+      "Sounds/Alltag und Kultur/Netflix.mp3",
+      "Sounds/Alltag und Kultur/Pixie Dust – Android-Benachrichtigungston.mp3",
+      "Sounds/Alltag und Kultur/Plastikfolie.mp3",
+      "Sounds/Alltag und Kultur/PornHub Intro.mp3",
+      "Sounds/Alltag und Kultur/Reißverschluss.mp3",
+      "Sounds/Alltag und Kultur/Seite in einem Buch umblättern.mp3",
+      "Sounds/Alltag und Kultur/Siri.mp3",
+      "Sounds/Alltag und Kultur/Staubsauger.mp3",
+      "Sounds/Alltag und Kultur/Unterschrift auf einem Papier.mp3",
+      "Sounds/Alltag und Kultur/Waschmaschine.mp3",
+      "Sounds/Alltag und Kultur/Whatsapp Chat.mp3"
+    ];
 
+    const BLOCK_DURATION_MS = 3600000;
+    const now = Date.now();
+    let blocked = JSON.parse(localStorage.getItem("soundcheck_blocked") || "{}");
+
+    const available = sounds.filter(sound => {
+      const lastPlayed = blocked[sound];
+      return !lastPlayed || now - lastPlayed > BLOCK_DURATION_MS;
+    });
+
+    if (available.length === 0) {
+      localStorage.removeItem("soundcheck_blocked");
+      location.reload();
+    } else {
+      const randomSound = available[Math.floor(Math.random() * available.length)];
+      const audio = document.getElementById("audio");
+      const source = document.getElementById("audioSource");
+      const title = document.getElementById("soundTitle");
+
+      source.src = randomSound;
+      audio.load();
+
+      title.textContent = randomSound.split('/').pop().replace(/\.(mp3|wav)$/i, '');
+      blocked[randomSound] = now;
+      localStorage.setItem("soundcheck_blocked", JSON.stringify(blocked));
+    }
+
+    function showTitle() {
+      document.getElementById("soundTitle").style.display = "block";
+    }
+  </script>
 </body>
 </html>
