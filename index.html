@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SoundCheck</title>
+</head>
+<body>
+    <h1>SoundCheck - Kategorie: Alltag</h1>
+    <script>
+        const sounds = [
+            "Dosen oeffnen.mp3",
+            "Kochendes Wasser.mp3",
+            "Plastikfolie.mp3"
+        ];
+        const randomSound = sounds[Math.floor(Math.random() * sounds.length)];
+        document.write(`<audio controls autoplay src="Sounds/Alltag/${randomSound}"></audio>`);
+    </script>
+</body>
+</html>
