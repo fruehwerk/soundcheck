@@ -1,54 +1,128 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SoundCheck – Technik &amp; Digitales</title>
-    <style>
-        body {
-            background: #121212;
-            color: #fff;
-            font-family: system-ui, sans-serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            padding: 2rem;
-        }
-        h1 {
-            font-size: 2rem;
-            margin-bottom: 1rem;
-            text-align: center;
-        }
-        .player {
-            background: #1e1e1e;
-            padding: 2rem;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-        }
-        audio {
-            width: 300px;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SoundCheck – Technik & Digitales</title>
+  <style>
+    body {
+      background: #121212;
+      color: #fff;
+      font-family: system-ui, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 2rem;
+    }
+
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+
+    .player {
+      background: #1e1e1e;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    audio {
+      width: 300px;
+      margin-bottom: 1rem;
+    }
+
+    .title {
+      font-size: 1.1rem;
+      color: #ccc;
+      margin-top: 1rem;
+      display: none;
+    }
+
+    button {
+      margin-top: 1rem;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 0.6rem 1.2rem;
+      border-radius: 8px;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+  </style>
 </head>
 <body>
-    <h1>SoundCheck – Technik &amp; Digitales</h1>
-    <div class="player">
-        <audio id="audio" controls>
-            <source id="audioSource" type="audio/mpeg">
-            Dein Browser unterstützt das Audio-Element nicht.
-        </audio>
-    </div>
-    
-<script>
-    const sounds = ["Sounds/Technik & Digitales/Intel.mp3", "Sounds/Technik & Digitales/Windows-Fehler.mp3", "Sounds/Technik & Digitales/Discord Anruf.mp3"];
-    const randomSound = sounds[Math.floor(Math.random() * sounds.length)];
-    const audio = document.getElementById('audio');
-    const source = document.getElementById('audioSource');
-    source.src = randomSound;
-    audio.load();
-</script>
+  <h1>SoundCheck – Technik & Digitales</h1>
+  <div class="player">
+    <audio id="audio" controls>
+      <source id="audioSource" type="audio/mpeg" />
+      Dein Browser unterstützt das Audio-Element nicht.
+    </audio>
+    <button onclick="showTitle()">Lösung</button>
+    <div class="title" id="soundTitle"></div>
+  </div>
 
+  <script>
+    const sounds = [
+      "Sounds/Technik und Digitales/AK 47-8760.mp3",
+      "Sounds/Technik und Digitales/Airbus.mp3",
+      "Sounds/Technik und Digitales/BMW Werbung Maerz 2013.mp3",
+      "Sounds/Technik und Digitales/Discord Anruf.mp3",
+      "Sounds/Technik und Digitales/Discord–Abwesenheitsbenachrichtigung .mp3",
+      "Sounds/Technik und Digitales/Drucker.mp3",
+      "Sounds/Technik und Digitales/Feuerzeug.mp3",
+      "Sounds/Technik und Digitales/Fiat 500 Zweizylinder.mp3",
+      "Sounds/Technik und Digitales/Flugzeugtoilette.mp3",
+      "Sounds/Technik und Digitales/Gamecube Startscreen.wav",
+      "Sounds/Technik und Digitales/Intel.mp3",
+      "Sounds/Technik und Digitales/JBL Bluetooth.mp3",
+      "Sounds/Technik und Digitales/Leopard 2A7 Motorstart, 1500 PS.mp3",
+      "Sounds/Technik und Digitales/Mercedes G63 AMG Brabus.mp3",
+      "Sounds/Technik und Digitales/Microsoft Teams Benachrichtigung.mp3",
+      "Sounds/Technik und Digitales/Microsoft Windows 7 Startscreen.mp3",
+      "Sounds/Technik und Digitales/Nintendo 3DS Startscreen.wav",
+      "Sounds/Technik und Digitales/Nintendo 64 Startscreen Screen.wav",
+      "Sounds/Technik und Digitales/Nintendo DS Startscreen Screen.wav",
+      "Sounds/Technik und Digitales/Teams Microsoft Teams Anrufer-Ton.mp3",
+      "Sounds/Technik und Digitales/Wii Startscreen.wav",
+      "Sounds/Technik und Digitales/Windows-Fehler.mp3"
+    ];
+
+    const BLOCK_DURATION_MS = 3600000;
+    const now = Date.now();
+    let blocked = JSON.parse(localStorage.getItem("soundcheck_blocked") || "{}");
+
+    const available = sounds.filter(sound => {
+      const lastPlayed = blocked[sound];
+      return !lastPlayed || now - lastPlayed > BLOCK_DURATION_MS;
+    });
+
+    if (available.length === 0) {
+      localStorage.removeItem("soundcheck_blocked");
+      location.reload();
+    } else {
+      const randomSound = available[Math.floor(Math.random() * available.length)];
+      const audio = document.getElementById("audio");
+      const source = document.getElementById("audioSource");
+      const title = document.getElementById("soundTitle");
+
+      source.src = randomSound;
+      audio.load();
+
+      title.textContent = randomSound.split('/').pop().replace(/\.(mp3|wav)$/i, '');
+      blocked[randomSound] = now;
+      localStorage.setItem("soundcheck_blocked", JSON.stringify(blocked));
+    }
+
+    function showTitle() {
+      document.getElementById("soundTitle").style.display = "block";
+    }
+  </script>
 </body>
 </html>
