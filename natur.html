@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="de">
 <head>
@@ -41,6 +42,19 @@
     .title {
       font-size: 1.1rem;
       color: #ccc;
+      margin-top: 1rem;
+      display: none;
+    }
+
+    button {
+      margin-top: 1rem;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 0.6rem 1.2rem;
+      border-radius: 8px;
+      font-size: 1rem;
+      cursor: pointer;
     }
   </style>
 </head>
@@ -51,6 +65,7 @@
       <source id="audioSource" type="audio/mpeg" />
       Dein Browser unterstützt das Audio-Element nicht.
     </audio>
+    <button onclick="showTitle()">Lösung</button>
     <div class="title" id="soundTitle"></div>
   </div>
 
@@ -77,20 +92,15 @@
       "Sounds/Natur/Ziegen Maeh.mp3"
     ];
 
-    // 1 Stunde = 3600000 ms
     const BLOCK_DURATION_MS = 3600000;
     const now = Date.now();
-
-    // Lade gespeicherte Daten
     let blocked = JSON.parse(localStorage.getItem("soundcheck_blocked") || "{}");
 
-    // Filtere Sounds, die innerhalb der letzten Stunde abgespielt wurden
     const available = sounds.filter(sound => {
       const lastPlayed = blocked[sound];
       return !lastPlayed || now - lastPlayed > BLOCK_DURATION_MS;
     });
 
-    // Falls keine Sounds mehr übrig sind, lösche den Verlauf
     if (available.length === 0) {
       localStorage.removeItem("soundcheck_blocked");
       location.reload();
@@ -102,11 +112,14 @@
 
       source.src = randomSound;
       audio.load();
-      title.textContent = randomSound.split('/').pop().replace(/\.(mp3|wav)$/i, '');
 
-      // Merke den Zeitpunkt der Wiedergabe
+      title.textContent = randomSound.split('/').pop().replace(/\.(mp3|wav)$/i, '');
       blocked[randomSound] = now;
       localStorage.setItem("soundcheck_blocked", JSON.stringify(blocked));
+    }
+
+    function showTitle() {
+      document.getElementById("soundTitle").style.display = "block";
     }
   </script>
 </body>
