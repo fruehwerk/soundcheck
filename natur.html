@@ -1,74 +1,90 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SoundCheck – Natur</title>
-    <style>
-        body {
-            background: #121212;
-            color: #fff;
-            font-family: system-ui, sans-serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            padding: 2rem;
-        }
-        h1 {
-            font-size: 2rem;
-            margin-bottom: 1rem;
-            text-align: center;
-        }
-        .player {
-            background: #1e1e1e;
-            padding: 2rem;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-        }
-        audio {
-            width: 300px;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SoundCheck – Natur</title>
+  <style>
+    body {
+      background: #121212;
+      color: #fff;
+      font-family: system-ui, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 2rem;
+    }
+
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+
+    .player {
+      background: #1e1e1e;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    audio {
+      width: 300px;
+      margin-bottom: 1rem;
+    }
+
+    .title {
+      font-size: 1.1rem;
+      color: #ccc;
+    }
+  </style>
 </head>
 <body>
-    <h1>SoundCheck – Natur</h1>
-    <div class="player">
-        <audio id="audio" controls>
-            <source id="audioSource" type="audio/mpeg">
-            Dein Browser unterstützt das Audio-Element nicht.
-        </audio>
-    </div>
-    
-<script>
+  <h1>SoundCheck – Natur</h1>
+  <div class="player">
+    <audio id="audio" controls>
+      <source id="audioSource" type="audio/mpeg" />
+      Dein Browser unterstützt das Audio-Element nicht.
+    </audio>
+    <div class="title" id="soundTitle"></div>
+  </div>
+
+  <script>
     const sounds = [
-        "Sounds/Natur/Agressiver Pitbull Bellen.mp3",
-        "Sounds/Natur/Baby Crocodile.mp3",
-        "Sounds/Natur/Baby Reh.mp3",
-        "Sounds/Natur/Chihuahua bellen.mp3",
-        "Sounds/Natur/Schimpanzee.mp3",
-        "Sounds/Natur/Deutscher Schäferhund bellt.mp3",
-        "Sounds/Natur/Eule.mp3",
-        "Sounds/Natur/Feuer.mp3",
-        "Sounds/Natur/Gecko in Bali.mp3",
-        "Sounds/Natur/Gletscherkalben.mp3",
-        "Sounds/Natur/Hirsch.mp3",
-        "Sounds/Natur/Kuecken.mp3",
-        "Sounds/Natur/Nilpferd.mp3",
-        "Sounds/Natur/Singende San Dünen in Al-Askharah, Oman.wav",
-        "Sounds/Natur/Singende San Dünen in Near Tarfaya, Marocco.wav",
-        "Sounds/Natur/Specht.wav",
-        "Sounds/Natur/Taube.mp3",
-        "Sounds/Natur/Uhu.mp3",
-        "Sounds/Natur/Ziegen Maeh.mp3"
+      "Sounds/Natur/Agressiver Pitbull Bellen.mp3",
+      "Sounds/Natur/Baby Crocodile.mp3",
+      "Sounds/Natur/Baby Reh.mp3",
+      "Sounds/Natur/Chihuahua bellen.mp3",
+      "Sounds/Natur/Schimpanzee.mp3",
+      "Sounds/Natur/Deutscher Schäferhund bellt.mp3",
+      "Sounds/Natur/Eule.mp3",
+      "Sounds/Natur/Feuer.mp3",
+      "Sounds/Natur/Gecko in Bali.mp3",
+      "Sounds/Natur/Gletscherkalben.mp3",
+      "Sounds/Natur/Hirsch.mp3",
+      "Sounds/Natur/Kuecken.mp3",
+      "Sounds/Natur/Nilpferd.mp3",
+      "Sounds/Natur/Singende San Dünen in Al-Askharah, Oman.wav",
+      "Sounds/Natur/Singende San Dünen in Near Tarfaya, Marocco.wav",
+      "Sounds/Natur/Specht.wav",
+      "Sounds/Natur/Taube.mp3",
+      "Sounds/Natur/Uhu.mp3",
+      "Sounds/Natur/Ziegen Maeh.mp3"
     ];
+
     const randomSound = sounds[Math.floor(Math.random() * sounds.length)];
     const audio = document.getElementById('audio');
     const source = document.getElementById('audioSource');
+    const title = document.getElementById('soundTitle');
+
     source.src = randomSound;
     audio.load();
-</script>
-
+    title.textContent = randomSound.split('/').pop().replace(/\.(mp3|wav)$/i, '');
+  </script>
 </body>
 </html>
