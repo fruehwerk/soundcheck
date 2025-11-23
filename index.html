@@ -20,7 +20,7 @@
 
     h1 {
       font-size: 2rem;
-      margin-bottom: 1rem;
+      margin-bottom: 2rem;
       text-align: center;
     }
 
@@ -29,66 +29,43 @@
       padding: 2rem;
       border-radius: 1rem;
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+      max-width: 600px;
+      width: 100%;
       display: flex;
-      flex-direction: column;
+      justify-content: center;
       align-items: center;
-      max-width: 90vw;
-    }
-
-    button {
-      background: #00bcd4;
-      color: white;
-      border: none;
-      padding: 1rem 2rem;
-      margin: 1rem 0;
-      border-radius: 2rem;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
-
-    button:hover {
-      background: #0097a7;
     }
 
     audio {
       width: 100%;
-      margin-top: 1rem;
+      max-width: 100%;
+      border-radius: 0.5rem;
+      background-color: #333;
     }
 
-    @media (min-width: 768px) {
-      h1 {
-        font-size: 2.5rem;
-      }
-      button {
-        font-size: 1.1rem;
-      }
-      .player {
-        max-width: 600px;
-      }
-    }
   </style>
 </head>
 <body>
   <h1>🎧 SoundCheck – Zufallssound</h1>
   <div class="player">
-    <button onclick="playRandomSound()">🔀 Zufälligen Sound abspielen</button>
-    <audio id="audio" controls></audio>
+    <audio id="audioPlayer" controls autoplay>
+      <source id="audioSource" src="" type="audio/mpeg" />
+      Dein Browser unterstützt kein Audio.
+    </audio>
   </div>
 
   <script>
     const sounds = [
-      "Sounds/Alltag/Dosen_oeffnen.mp3",
-      "Sounds/Alltag/Kochendes_Wasser.mp3",
+      "Sounds/Alltag/Dosen oeffnen.mp3",
+      "Sounds/Alltag/Kochendes Wasser.mp3",
       "Sounds/Alltag/Plastikfolie.mp3"
     ];
 
-    function playRandomSound() {
-      const random = Math.floor(Math.random() * sounds.length);
-      const audio = document.getElementById("audio");
-      audio.src = sounds[random];
-      audio.play();
-    }
+    const randomIndex = Math.floor(Math.random() * sounds.length);
+    const selectedSound = sounds[randomIndex];
+    const audioSource = document.getElementById("audioSource");
+    audioSource.src = selectedSound;
+    document.getElementById("audioPlayer").load();
   </script>
 </body>
 </html>
